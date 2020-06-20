@@ -5,7 +5,7 @@ Windows application
 * * * *
 [tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)
-![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)  
+![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)
 #Make it a Windows application with pyinstaller
 **Windows10+Anaconda3**
 
@@ -61,3 +61,21 @@ copy file  -> TecoGAN-master/dist
 termcolor.py
 ```
 It became a Windows application.
+
+
+_ _ _
+##memo
+## How to super-resolution video
+Converts videos into serialized images.
+
+`ffmpeg -i test.mp4 -vcodec png main/LR/calendarR/image_%04d.png
+`
+**super-resolution**
+`tecoGAN.bat`
+
+output -> main/results/output_%03d.png
+To return the output result to a movie, do as follows.  
+
+`ffmpeg -r 24 -i output_%04d.png -vcodec libx264 -pix_fmt yuv420p -r 24 test.mp4`
+
+Change the codec and format accordingly. Since "24" in the command is the frame rate, enter the frame rate of the original movie.
