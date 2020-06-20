@@ -5,7 +5,7 @@ Windows application
 * * * *
 [tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)
-![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)
+![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)  
 #Make it a Windows application with pyinstaller
 **Windows10+Anaconda3**
 
