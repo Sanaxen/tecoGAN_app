@@ -69,13 +69,13 @@ _ _ _
 Converts videos into serialized images.
 
 `ffmpeg -i test.mp4 -vcodec png main/LR/calendarR/image_%04d.png
-`
-**super-resolution**
+`  
+**super-resolution**  
 `tecoGAN.bat`
 
 output -> main/results/output_%03d.png
 To return the output result to a movie, do as follows.  
 
-`ffmpeg -r 24 -i output_%04d.png -vcodec libx264 -pix_fmt yuv420p -r 24 test.mp4`
+`ffmpeg -r 24 -i output_%04d.png -vcodec libx264 -pix_fmt yuv420p -r 24 test.mp4`  
 
 Change the codec and format accordingly. Since "24" in the command is the frame rate, enter the frame rate of the original movie.
