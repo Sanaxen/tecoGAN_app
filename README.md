@@ -5,8 +5,8 @@ Windows application
 * * * *
 [tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)
-![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)
-#Make it a Windows application with pyinstaller
+![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)  
+#Make it a Windows application with pyinstaller  
 **Windows10+Anaconda3**
 
 
@@ -68,7 +68,7 @@ _ _ _
 ## How to super-resolution video
 Converts videos into serialized images.
 
-`ffmpeg -i test.mp4 -vcodec png main/LR/calendarR/image_%04d.png
+`ffmpeg -i test.mp4 -vcodec png main/LR/calendar/image_%04d.png
 `  
 **super-resolution**  
 `tecoGAN.bat`
