@@ -10,9 +10,10 @@ Windows application
 [tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)  
-#Make it a Windows application with pyinstaller  
+## Make it a Windows application with pyinstaller  
 **Windows10+Anaconda3**
-
+## Requirements  
+ImageMagick-7.0.10-Q16
 
 ```
 pip install --ignore-installed --upgrade tensorflow-gpu==1.15.0.
@@ -49,15 +50,15 @@ TecoGAN-master/lib
 copy directory  -> TecoGAN-master/dist
 
 ```
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/google
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/absl
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/wrapt
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/gast
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/astor
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/google
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/absl
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/wrapt
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/gast
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/astor
 
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_applications
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_preprocessing
-[Users]\bccat\Anaconda3\envs\tecoGAN\Lib\site-packages/tensorflow_estimator
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_applications
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_preprocessing
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/tensorflow_estimator
 ```
 
 copy file  -> TecoGAN-master/dist
