@@ -24,6 +24,23 @@ namespace super_resolution_Application
             }
         }
 
+        /// <summary>
+        /// 指定したファイルをロックせずに、System.Drawing.Imageを作成する。
+        /// </summary>
+        /// <param name="filename">作成元のファイルのパス</param>
+        /// <returns>作成したSystem.Drawing.Image。</returns>
+        public static System.Drawing.Image CreateImage(string filename)
+        {
+            System.IO.FileStream fs = new System.IO.FileStream(
+                filename,
+                System.IO.FileMode.Open,
+                System.IO.FileAccess.Read);
+            System.Drawing.Image img = System.Drawing.Image.FromStream(fs);
+            fs.Close();
+            return img;
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult res = openFileDialog1.ShowDialog();
@@ -31,7 +48,7 @@ namespace super_resolution_Application
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            pictureBox1.Image = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+            pictureBox1.Image = CreateImage(openFileDialog1.FileName);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,8 +57,8 @@ namespace super_resolution_Application
                 System.IO.Path.GetFullPath(
                     Environment.GetCommandLineArgs()[0]));
 
-            //apppath = @"D:\github\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
-            System.Environment.CurrentDirectory= apppath + "\\main";
+            //apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
+            System.Environment.CurrentDirectory = apppath + "\\main";
 
             DirectoryInfo target = new DirectoryInfo(@"LR\calendar");
             foreach (FileInfo file in target.GetFiles())
@@ -53,11 +70,29 @@ namespace super_resolution_Application
             {
                 file.Delete();
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 15; i++)
             {
-                string ext = System.IO.Path.GetExtension(openFileDialog1.FileName);
-                string newfile = string.Format(@"LR\calendar\{0:D4}"+ext, i);
-                File.Copy(openFileDialog1.FileName, newfile, true);
+#if false
+                string newfile = string.Format(@"LR\calendar\{0:D4}"+".png", i);
+                pictureBox1.Image.Save(newfile, System.Drawing.Imaging.ImageFormat.Png);
+                //File.Copy(openFileDialog1.FileName, newfile, true);
+#else
+                string newfile1 = string.Format(@"LR\calendar\{0:D4}_" + ".png", i);
+                pictureBox1.Image.Save(newfile1, System.Drawing.Imaging.ImageFormat.Png);
+
+                string newfile2 = string.Format(@"LR\calendar\{0:D4}" + ".png", i);
+                var imagemagick = new System.Diagnostics.ProcessStartInfo();
+                imagemagick.FileName = "cmd.exe";
+                imagemagick.UseShellExecute = true;
+                imagemagick.Arguments = "/c";
+                imagemagick.Arguments += " ..\\conv.bat";
+                imagemagick.Arguments += " " + newfile1;
+                imagemagick.Arguments += " \"1,0,0,1,0," + (-i).ToString()+"\"";
+                imagemagick.Arguments += " " + newfile2;
+                System.Diagnostics.Process imagemagick_p = System.Diagnostics.Process.Start(imagemagick);
+                imagemagick_p.WaitForExit();
+                File.Delete(newfile1);
+#endif
             }
             var app = new System.Diagnostics.ProcessStartInfo();
             app.FileName = "main.exe";
@@ -82,7 +117,7 @@ namespace super_resolution_Application
             string outfile = "";
             outfile = directoryName + "\\" + fileName + "_super_res" + extension;
             System.IO.File.Copy(@"results\calendar\output_0001.png", outfile, true);
-            pictureBox2.Image = System.Drawing.Image.FromFile(outfile);
+            pictureBox2.Image = CreateImage(outfile);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
