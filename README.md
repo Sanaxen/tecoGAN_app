@@ -15,10 +15,20 @@ Windows application
 ## Requirements  
 ImageMagick-7.0.10-Q16
 
+#### GPU  
 ```
 pip install --ignore-installed --upgrade tensorflow-gpu==1.15.0.
 
+pip install torch==1.5.0+cu92 torchvision==0.6.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html
+```
 
+#### CPU  
+```
+pip install --ignore-installed --upgrade tensorflow==1.15.0.
+```
+
+#### CPU  & GPU
+```
 pip install numpy>=1.14.3
 pip install scipy>=1.0.1
 pip install scikit-image>=0.13.0
@@ -28,7 +38,7 @@ pip install Keras>=2.1.2
 pip install opencv-python>=2.4.11
 pip install ipython>=7.4.0
 
-pip install torch==1.5.0+cu92 torchvision==0.6.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html
+
 
 
 pip install pyinstaller
@@ -41,6 +51,7 @@ pyinstaller has terminated normally.
 However, it gives an error at run time.It worked by doing the following
 
 copy directory  -> TecoGAN-master/dist
+#### CPU  & GPU  
 ```
 TecoGAN-master/model
 TecoGAN-master/LR
@@ -59,6 +70,17 @@ copy directory  -> TecoGAN-master/dist
 [Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_applications
 [Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_preprocessing
 [Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/tensorflow_estimator
+```
+
+#### CPU  
+```
+[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/tensorflow_core
+```
+
+```
+[Users]\Anaconda3\envs\tecoGAN\Lib\xml
+[Users]\Anaconda3\envs\tecoGAN\Lib\unittest
+[Users]\Anaconda3\envs\tecoGAN\Lib\unittest
 ```
 
 copy file  -> TecoGAN-master/dist
