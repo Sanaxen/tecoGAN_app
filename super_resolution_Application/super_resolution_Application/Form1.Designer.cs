@@ -68,7 +68,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1251, 55);
+            this.panel2.Size = new System.Drawing.Size(1260, 55);
             this.panel2.TabIndex = 2;
             // 
             // button3
@@ -103,7 +103,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 55);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(629, 525);
+            this.pictureBox1.Size = new System.Drawing.Size(622, 536);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -113,20 +113,20 @@
             // 
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.ErrorImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(629, 55);
+            this.pictureBox2.Location = new System.Drawing.Point(622, 55);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(622, 525);
+            this.pictureBox2.Size = new System.Drawing.Size(638, 536);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(629, 55);
+            this.splitter1.Location = new System.Drawing.Point(622, 55);
             this.splitter1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 525);
+            this.splitter1.Size = new System.Drawing.Size(3, 536);
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
             // 
@@ -138,7 +138,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1251, 580);
+            this.ClientSize = new System.Drawing.Size(1260, 591);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
