@@ -18,8 +18,8 @@ namespace super_resolution_Application
         bool stopping = false;
         double Fps = 24;
         bool video = false;
-        string apppath = "";
-        //string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
+        //string apppath = "";
+        string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
 
 
         public Form1()
@@ -272,6 +272,11 @@ namespace super_resolution_Application
                 {
                     OpenCvSharp.Cv2.Resize(img, img, OpenCvSharp.Size.Zero, pictureBox1.Width, pictureBox1.Height, OpenCvSharp.InterpolationFlags.Cubic);
                 }
+
+                pictureBox2.Image = CreateImage(newfile);
+                newfile = string.Format(@"LR\calendar\{0:D4}" + ".png", i);
+                if (!System.IO.File.Exists(newfile)) continue;
+                pictureBox1.Image = CreateImage(newfile);
                 vw.Write(img);
             }
             vw.Dispose();
@@ -289,7 +294,7 @@ namespace super_resolution_Application
                 stopping = true;
                 if (tecoGAN != null)
                 {
-                    if (tecoGAN.HasExited)
+                    if (!tecoGAN.HasExited)
                     {
                         tecoGAN.Kill();
                         tecoGAN.Close();
@@ -316,6 +321,9 @@ namespace super_resolution_Application
                 try
                 {
                     pictureBox2.Image = CreateImage(newfile2);
+
+                    newfile2 = string.Format(@"LR\calendar\{0:D4}" + ".png", tecoGAN_output_num + 1);
+                    pictureBox1.Image = CreateImage(newfile2);
                     tecoGAN_output_num += 1;
                 }
                 catch { }
