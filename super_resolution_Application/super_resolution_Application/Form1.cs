@@ -18,8 +18,8 @@ namespace super_resolution_Application
         bool stopping = false;
         double Fps = 24;
         bool video = false;
-        //string apppath = "";
-        string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
+        string apppath = "";
+        //string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
 
 
         public Form1()
