@@ -268,10 +268,10 @@ namespace super_resolution_Application
 
                 if (!System.IO.File.Exists(newfile)) continue;
                 var img = OpenCvSharp.Cv2.ImRead(newfile, OpenCvSharp.ImreadModes.Color);
-                if (fileName != "temp")
-                {
-                    OpenCvSharp.Cv2.Resize(img, img, OpenCvSharp.Size.Zero, pictureBox1.Width, pictureBox1.Height, OpenCvSharp.InterpolationFlags.Cubic);
-                }
+                //if (fileName != "temp")
+                //{
+                //    OpenCvSharp.Cv2.Resize(img, img, OpenCvSharp.Size.Zero, pictureBox1.Width, pictureBox1.Height, OpenCvSharp.InterpolationFlags.Cubic);
+                //}
 
                 pictureBox2.Image = CreateImage(newfile);
                 newfile = string.Format(@"LR\calendar\{0:D4}" + ".png", i);
