@@ -1,0 +1,1 @@
+call JoinLRVideo.bat test.mp4 tecoGAN.mp4
