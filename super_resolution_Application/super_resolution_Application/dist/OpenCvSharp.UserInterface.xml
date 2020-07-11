@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenCvSharp.UserInterface</name>
+    </assembly>
+    <members>
+        <member name="T:OpenCvSharp.UserInterface.CvWindowEx">
+            <summary>
+            Original CvWindow implementation without highgui
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.#cctor">
+            <summary>
+            static constructor
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.#ctor(OpenCvSharp.Mat)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="image"></param>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.#ctor(System.Windows.Forms.PictureBoxSizeMode)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="sizeMode"></param>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.#ctor(OpenCvSharp.Mat,System.Windows.Forms.PictureBoxSizeMode)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="image"></param>
+            <param name="sizeMode"></param>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.Dispose">
+            <summary>
+            Finalizer
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.UserInterface.CvWindowEx.Image">
+            <summary>
+            Gets or sets an image to be shown
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.UserInterface.CvWindowEx.PictureBox">
+            <summary>
+            Gets Picturebox control
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.UserInterface.CvWindowEx.Trackbars">
+            <summary>
+            Gets all created trackbars
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.ShowImage(OpenCvSharp.Mat)">
+            <summary>
+            Shows the image in this window
+            </summary>
+            <param name="image">Image to be shown. </param>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.CreateTrackbar(System.String,System.Int32,System.Int32,OpenCvSharp.CvTrackbarCallback)">
+            <summary>
+            Creates the trackbar and attaches it to this window
+            </summary>
+            <param name="name">Name of created trackbar. </param>
+            <param name="value">The position of the slider</param>
+            <param name="count">Maximal position of the slider. Minimal position is always 0. </param>
+            <param name="onChange">the function to be called every time the slider changes the position. This function should be prototyped as void Foo(int);</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.WaitKey">
+            <summary>
+            Waits for a pressed key
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.WaitKey(System.Int32)">
+            <summary>
+            Waits for a pressed key
+            </summary>
+            <returns>Key code</returns>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.ShowImages(OpenCvSharp.Mat[])">
+            <summary>
+            
+            </summary>
+            <param name="images"></param>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.StartKeyCheck">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.EndKeyCheck">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.ClosedAllWindows">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.GetPressedKey">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.SetClientSize(System.Drawing.Size)">
+            <summary>
+            ClientSizeを画面からはみ出ない大きさに調整して設定する.
+            </summary>
+            <param name="size"></param>
+        </member>
+        <member name="F:OpenCvSharp.UserInterface.CvWindowEx.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.CvWindowEx.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OpenCvSharp.UserInterface.PictureBoxIpl">
+            <summary>
+            PictureBox control which supports IplImage
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.PictureBoxIpl.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.UserInterface.PictureBoxIpl.ImageIpl">
+            <summary>
+            Gets or sets the IplImage instance to be shown
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.PictureBoxIpl.RefreshIplImage">
+            <summary>
+            Refreshes the shown image
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.PictureBoxIpl.RefreshIplImage(OpenCvSharp.Mat)">
+            <summary>
+            Refreshes the shown image
+            </summary>
+            <param name="img"></param>
+        </member>
+        <member name="T:OpenCvSharp.UserInterface.TrackbarWithLabel">
+            <summary>
+            A Trackbar come with label
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.TrackbarWithLabel.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.TrackbarWithLabel.#ctor(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="labelText"></param>
+            <param name="max"></param>
+            <param name="min"></param>
+            <param name="pos"></param>
+        </member>
+        <member name="P:OpenCvSharp.UserInterface.TrackbarWithLabel.Trackbar">
+            <summary>
+            TrackBar control
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.UserInterface.TrackbarWithLabel.Label">
+            <summary>
+            Label control
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.TrackbarWithLabel.SetLabelText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.TrackbarWithLabel._trackBar_ValueChanged(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:OpenCvSharp.UserInterface.TrackbarWithLabel.components">
+            <summary> 
+            必要なデザイナ変数です。
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.TrackbarWithLabel.Dispose(System.Boolean)">
+            <summary> 
+            使用中のリソースをすべてクリーンアップします。
+            </summary>
+            <param name="disposing">マネージ リソースが破棄される場合 true、破棄されない場合は false です。</param>
+        </member>
+        <member name="M:OpenCvSharp.UserInterface.TrackbarWithLabel.InitializeComponent">
+            <summary> 
+            デザイナ サポートに必要なメソッドです。このメソッドの内容を 
+            コード エディタで変更しないでください。
+            </summary>
+        </member>
+    </members>
+</doc>
