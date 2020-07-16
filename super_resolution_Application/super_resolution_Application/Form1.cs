@@ -18,7 +18,7 @@ namespace super_resolution_Application
         bool stopping = false;
         double Fps = 24;
         bool video = false;
-        string apppath = "";
+        string apppath = System.IO.Directory.GetCurrentDirectory();
         //string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
 
 
@@ -33,6 +33,7 @@ namespace super_resolution_Application
                         Environment.GetCommandLineArgs()[0]));
             }
 
+            textBox1.Text = apppath;
             string[] cmds = System.Environment.GetCommandLineArgs();
             if ( cmds.Length >= 2)
             {
@@ -73,7 +74,7 @@ namespace super_resolution_Application
                 {
 
                     System.IO.Directory.SetCurrentDirectory(apppath);
-                    System.IO.DirectoryInfo target = new System.IO.DirectoryInfo(@"main\LR\calendar");
+                    System.IO.DirectoryInfo target = new System.IO.DirectoryInfo(@"main\tecoGAN\LR\calendar");
                     foreach (System.IO.FileInfo file in target.GetFiles())
                     {
                         file.Delete();
@@ -99,7 +100,7 @@ namespace super_resolution_Application
                                 pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(mat);
 
                                 //OpenCvSharp.Cv2.Resize(mat, mat, OpenCvSharp.Size(), 0, 0);
-                                string filename = string.Format(@"main\LR\calendar\{0:D4}.png", image_num);
+                                string filename = string.Format(@"main\tecoGAN\LR\calendar\{0:D4}.png", image_num);
                                 //pictureBox1.Image.Save(filename, System.Drawing.Imaging.ImageFormat.Png);
 
                                 OpenCvSharp.Cv2.ImWrite(filename, mat, (int[])null);
@@ -124,7 +125,7 @@ namespace super_resolution_Application
                     vcap.Dispose();//Memory release
                     stopping = false;
 
-                    pictureBox1.Image = CreateImage(@"main\LR\calendar\0001.png");
+                    pictureBox1.Image = CreateImage(@"main\tecoGAN\LR\calendar\0001.png");
                 }
             }
         }
@@ -138,7 +139,7 @@ namespace super_resolution_Application
         {
             System.Environment.CurrentDirectory = apppath + "\\main";
 
-            var target = new DirectoryInfo(@"results\calendar");
+            var target = new DirectoryInfo(@"tecoGAN\results\calendar");
             foreach (FileInfo file in target.GetFiles())
             {
                 file.Delete();
@@ -148,7 +149,7 @@ namespace super_resolution_Application
             {
                 if (openFileDialog1.FileName != "")
                 {
-                    DirectoryInfo target1 = new DirectoryInfo(@"LR\calendar");
+                    DirectoryInfo target1 = new DirectoryInfo(@"tecoGAN\LR\calendar");
                     foreach (FileInfo file in target1.GetFiles())
                     {
                         file.Delete();
@@ -157,23 +158,15 @@ namespace super_resolution_Application
 
                     for (int i = 0; i < 15; i++)
                     {
-                        string newfile = string.Format(@"LR\calendar\{0:D4}" + ".png", i);
+                        string newfile = string.Format(@"tecoGAN\LR\calendar\{0:D4}" + ".png", i);
                         OpenCvSharp.Cv2.ImWrite(newfile, mat);
                     }
                 }
             }
             var app = new System.Diagnostics.ProcessStartInfo();
-            app.FileName = "main.exe";
+            app.FileName = "cmd.exe";
             app.UseShellExecute = true;
-            app.Arguments = " --cudaID 0";
-            app.Arguments += " --output_dir ./results/";
-            app.Arguments += " --summary_dir ./results/log/";
-            app.Arguments += " --mode inference";
-            app.Arguments += " --input_dir_LR ./LR/calendar";
-            app.Arguments += " --output_pre calendar";
-            app.Arguments += " --num_resblock 16";
-            app.Arguments += " --checkpoint ./model/TecoGAN";
-            app.Arguments += " --output_ext png";
+            app.Arguments = " /c main.bat";
 
             string directoryName = apppath;
             string fileName = "temp";
@@ -217,7 +210,7 @@ namespace super_resolution_Application
             {
                 string outfile = "";
                 outfile = directoryName + "\\" + fileName + "_super_res" + extension;
-                System.IO.File.Copy(@"results\calendar\output_0001.png", outfile, true);
+                System.IO.File.Copy(@"tecoGAN\results\calendar\output_0001.png", outfile, true);
                 pictureBox2.Image = CreateImage(outfile);
             }
             else
@@ -246,7 +239,7 @@ namespace super_resolution_Application
                 extension = System.IO.Path.GetExtension(openFileDialog1.FileName);
             }
 
-            pictureBox2.Image = CreateImage(string.Format(@"results\calendar\output_{0:D4}" + ".png", 1));
+            pictureBox2.Image = CreateImage(string.Format(@"tecoGAN\results\calendar\output_{0:D4}" + ".png", 1));
             string outfile = "";
             outfile = directoryName + "\\" + fileName + "_super_res.avi";
 
@@ -255,7 +248,7 @@ namespace super_resolution_Application
             var EncodedFormat = OpenCvSharp.FourCC.MJPG;
             OpenCvSharp.VideoWriter vw = new OpenCvSharp.VideoWriter(outfile, EncodedFormat, Fps, sz, true);
 
-            DirectoryInfo images = new DirectoryInfo(@"results\calendar");
+            DirectoryInfo images = new DirectoryInfo(@"tecoGAN\results\calendar");
             int filenum = 0;
             foreach (FileInfo file in images.GetFiles())
             {
@@ -264,7 +257,7 @@ namespace super_resolution_Application
             for (int i = 0; i < filenum; i++)
             {
                 if (stopping) break;
-                string newfile = string.Format(@"results\calendar\output_{0:D4}" + ".png", i);
+                string newfile = string.Format(@"tecoGAN\results\calendar\output_{0:D4}" + ".png", i);
 
                 if (!System.IO.File.Exists(newfile)) continue;
                 var img = OpenCvSharp.Cv2.ImRead(newfile, OpenCvSharp.ImreadModes.Color);
@@ -274,7 +267,7 @@ namespace super_resolution_Application
                 //}
 
                 pictureBox2.Image = CreateImage(newfile);
-                newfile = string.Format(@"LR\calendar\{0:D4}" + ".png", i);
+                newfile = string.Format(@"tecoGAN\LR\calendar\{0:D4}" + ".png", i);
                 if (!System.IO.File.Exists(newfile)) continue;
                 pictureBox1.Image = CreateImage(newfile);
                 vw.Write(img);
@@ -312,8 +305,8 @@ namespace super_resolution_Application
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (tecoGAN == null) return;
-            string newfile1 = string.Format(@"results\calendar\output_{0:D4}" + ".png", tecoGAN_output_num);
-            string newfile2 = string.Format(@"results\calendar\output_{0:D4}" + ".png", tecoGAN_output_num+1);
+            string newfile1 = string.Format(@"tecoGAN\results\calendar\output_{0:D4}" + ".png", tecoGAN_output_num);
+            string newfile2 = string.Format(@"tecoGAN\results\calendar\output_{0:D4}" + ".png", tecoGAN_output_num+1);
 
             if (!System.IO.File.Exists(newfile1) && !System.IO.File.Exists(newfile2)) return;
             if (System.IO.File.Exists(newfile2))
@@ -322,7 +315,7 @@ namespace super_resolution_Application
                 {
                     pictureBox2.Image = CreateImage(newfile2);
 
-                    newfile2 = string.Format(@"LR\calendar\{0:D4}" + ".png", tecoGAN_output_num + 1);
+                    newfile2 = string.Format(@"tecoGAN\LR\calendar\{0:D4}" + ".png", tecoGAN_output_num + 1);
                     pictureBox1.Image = CreateImage(newfile2);
                     tecoGAN_output_num += 1;
                 }
