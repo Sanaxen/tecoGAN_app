@@ -39,56 +39,7 @@ pip install opencv-python>=2.4.11
 pip install ipython>=7.4.0
 
 
-
-
-pip install pyinstaller
-
-
-pyinstaller main.py
 ```
-pyinstaller has terminated normally.
-
-However, it gives an error at run time.It worked by doing the following
-
-copy directory  -> TecoGAN-master/dist
-#### CPU  & GPU  
-```
-TecoGAN-master/model
-TecoGAN-master/LR
-TecoGAN-master/lib
-```
-
-copy directory  -> TecoGAN-master/dist
-
-```
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/google
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/absl
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/wrapt
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/gast
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/astor
-
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_applications
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/keras_preprocessing
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/tensorflow_estimator
-```
-
-#### CPU  
-```
-[Users]\Anaconda3\envs\tecoGAN\Lib\site-packages/tensorflow_core
-```
-
-```
-[Users]\Anaconda3\envs\tecoGAN\Lib\xml
-[Users]\Anaconda3\envs\tecoGAN\Lib\unittest
-[Users]\Anaconda3\envs\tecoGAN\Lib\unittest
-```
-
-copy file  -> TecoGAN-master/dist
-```
-termcolor.py
-```
-It became a Windows application.
-
 
 _ _ _
 ##memo
