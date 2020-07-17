@@ -18,8 +18,9 @@ namespace super_resolution_Application
         bool stopping = false;
         double Fps = 24;
         bool video = false;
-        string apppath = System.IO.Directory.GetCurrentDirectory();
-        //string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
+        string folder = "";
+        //string apppath = System.IO.Directory.GetCurrentDirectory();
+        string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
 
 
         public Form1()
@@ -61,6 +62,7 @@ namespace super_resolution_Application
 
         private void button1_Click(object sender, EventArgs e)
         {
+            folder = "";
             DialogResult res = openFileDialog1.ShowDialog();
             if ( res == DialogResult.OK)
             {
@@ -98,6 +100,17 @@ namespace super_resolution_Application
                             if (mat.IsContinuous())
                             {
                                 pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(mat);
+                                {
+                                    //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+
+                                    // 幅２倍、高さ３倍のイメージを作成する
+                                    Bitmap bmp = new Bitmap(
+                                        pictureBox1.Image,
+                                        pictureBox1.Image.Width * 4,
+                                        pictureBox1.Image.Height * 4);
+
+                                    pictureBox1.Image = bmp;
+                                }
 
                                 //OpenCvSharp.Cv2.Resize(mat, mat, OpenCvSharp.Size(), 0, 0);
                                 string filename = string.Format(@"main\tecoGAN\LR\calendar\{0:D4}.png", image_num);
@@ -242,6 +255,10 @@ namespace super_resolution_Application
             pictureBox2.Image = CreateImage(string.Format(@"tecoGAN\results\calendar\output_{0:D4}" + ".png", 1));
             string outfile = "";
             outfile = directoryName + "\\" + fileName + "_super_res.avi";
+            if (File.Exists(outfile))
+            {
+                File.Delete(outfile);
+            }
 
             OpenCvSharp.Size sz = new OpenCvSharp.Size(pictureBox2.Image.Width, pictureBox2.Image.Height);
             int codec = 0; // コーデック(AVI)
@@ -274,6 +291,13 @@ namespace super_resolution_Application
             }
             vw.Dispose();
             stopping = false;
+
+            if (File.Exists(outfile))
+            {
+                Form2 video = new Form2();
+                video.axWindowsMediaPlayer1.URL = outfile;
+                video.Show();
+            }
         }
 
         private void button3_KeyDown(object sender, KeyEventArgs e)
@@ -320,6 +344,122 @@ namespace super_resolution_Application
                     tecoGAN_output_num += 1;
                 }
                 catch { }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            folder = "";
+            using (var ofd = new OpenFileDialog() { FileName = "SelectFolder", Filter = "Folder|.", CheckFileExists = false })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    folder = Path.GetDirectoryName(ofd.FileName);
+                }
+            }
+            if (folder == "") return;
+
+            System.IO.Directory.SetCurrentDirectory(apppath);
+            System.IO.DirectoryInfo target = new System.IO.DirectoryInfo(@"main\tecoGAN\LR\calendar");
+            foreach (System.IO.FileInfo file in target.GetFiles())
+            {
+                file.Delete();
+            }
+
+            int image_num = 0;
+            int width = 0;
+            int height = 0;
+            DirectoryInfo target1 = new DirectoryInfo(folder);
+            foreach (FileInfo file in target1.GetFiles())
+            {
+                OpenCvSharp.Mat mat = new OpenCvSharp.Mat();
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose();//Memory release
+                }
+                mat = OpenCvSharp.Cv2.ImRead(file.FullName);
+                pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(mat);
+
+                if ( width == 0 )
+                {
+                    width = pictureBox1.Image.Width;
+                    height = pictureBox1.Image.Height;
+                }else
+                {
+                    if (width != pictureBox1.Image.Width) continue;
+                    if (height != pictureBox1.Image.Height) continue;
+                }
+
+                string filename = string.Format(@"main\tecoGAN\LR\calendar\{0:D4}.png", image_num);
+                OpenCvSharp.Cv2.ImWrite(filename, mat, (int[])null);
+                image_num++;
+                mat.Dispose();//Memory release
+            }
+            pictureBox1.Image = CreateImage(@"main\tecoGAN\LR\calendar\0001.png");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            System.Environment.CurrentDirectory = apppath;
+
+            if (File.Exists(apppath + @"\test.mp4"))
+            {
+                File.Delete(apppath + @"\test.mp4");
+            }
+            var app = new System.Diagnostics.ProcessStartInfo();
+            app.FileName = "cmd.exe";
+            app.UseShellExecute = true;
+            app.Arguments = " /c png2Video_input_run.bat";
+            var png2Video = System.Diagnostics.Process.Start(app);
+            png2Video.EnableRaisingEvents = true;
+            png2Video.WaitForExit();
+            MessageBox.Show("終了しました");
+
+            if (File.Exists(apppath + @"\test.mp4"))
+            {
+                Form2 video = new Form2();
+                video.axWindowsMediaPlayer1.URL = apppath + @"\test.mp4";
+                video.Show();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            System.Environment.CurrentDirectory = apppath;
+
+            if (File.Exists(apppath + @"\output.mp4"))
+            {
+                File.Delete(apppath + @"\output.mp4");
+            }
+            var app = new System.Diagnostics.ProcessStartInfo();
+            app.FileName = "cmd.exe";
+            app.UseShellExecute = true;
+            app.Arguments = " /c png2Video_input_run.bat";
+            var png2Video_input = System.Diagnostics.Process.Start(app);
+            png2Video_input.EnableRaisingEvents = true;
+            //png2Video_input.WaitForExit();
+
+            app = new System.Diagnostics.ProcessStartInfo();
+            app.FileName = "cmd.exe";
+            app.UseShellExecute = true;
+            app.Arguments = " /c png2video_run.bat";
+            var png2video_run = System.Diagnostics.Process.Start(app);
+            png2video_run.EnableRaisingEvents = true;
+            png2video_run.WaitForExit();
+
+            app = new System.Diagnostics.ProcessStartInfo();
+            app.FileName = "cmd.exe";
+            app.UseShellExecute = true;
+            app.Arguments = " /c JoinLRVideo_run.bat";
+            var JoinLRVideo = System.Diagnostics.Process.Start(app);
+            JoinLRVideo.EnableRaisingEvents = true;
+            JoinLRVideo.WaitForExit();
+
+            if (File.Exists(apppath + @"\output.mp4"))
+            {
+                Form2 video = new Form2();
+                video.axWindowsMediaPlayer1.URL = apppath + @"\output.mp4";
+                video.Show();
             }
         }
     }

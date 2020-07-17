@@ -1,1 +1,1 @@
-call png2Video_input.bat 25 main/LR/calendar
+call png2Video_input.bat 25 main/tecoGAN/LR/calendar

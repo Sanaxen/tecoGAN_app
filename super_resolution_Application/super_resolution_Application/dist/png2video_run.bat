@@ -1,1 +1,1 @@
-call png2Video.bat 25 main/results calendar
+call png2Video.bat 25 main/tecoGAN/results calendar
