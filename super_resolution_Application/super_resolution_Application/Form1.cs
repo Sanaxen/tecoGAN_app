@@ -13,14 +13,15 @@ namespace super_resolution_Application
 {
     public partial class Form1 : Form
     {
+        int tecoGAN_input_num = 0;
         int tecoGAN_output_num = 0;
         System.Diagnostics.Process tecoGAN = null;
         bool stopping = false;
         double Fps = 24;
         bool video = false;
         string folder = "";
-        //string apppath = System.IO.Directory.GetCurrentDirectory();
-        string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
+        string apppath = System.IO.Directory.GetCurrentDirectory();
+        //string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
 
 
         public Form1()
@@ -112,7 +113,15 @@ namespace super_resolution_Application
                                     pictureBox1.Image = bmp;
                                 }
 
-                                //OpenCvSharp.Cv2.Resize(mat, mat, OpenCvSharp.Size(), 0, 0);
+                                if (!checkBox1.Checked)
+                                {
+                                    OpenCvSharp.Cv2.Resize(mat, mat, new OpenCvSharp.Size((int)((float)mat.Width * (float)numericUpDown1.Value), (int)((float)mat.Height * (float)numericUpDown1.Value)), 0, 0);
+                                }
+                                else
+                                {
+                                    OpenCvSharp.Cv2.Resize(mat, mat, new OpenCvSharp.Size((int)(0.5f + (float)mat.Width / (float)numericUpDown1.Value), (int)(0.5f + (float)mat.Height / (float)numericUpDown1.Value)), 0, 0);
+                                }
+
                                 string filename = string.Format(@"main\tecoGAN\LR\calendar\{0:D4}.png", image_num);
                                 //pictureBox1.Image.Save(filename, System.Drawing.Imaging.ImageFormat.Png);
 
@@ -140,6 +149,7 @@ namespace super_resolution_Application
 
                     pictureBox1.Image = CreateImage(@"main\tecoGAN\LR\calendar\0001.png");
                 }
+                MessageBox.Show("finished");
             }
         }
 
@@ -152,6 +162,7 @@ namespace super_resolution_Application
         {
             System.Environment.CurrentDirectory = apppath + "\\main";
 
+            tecoGAN_input_num = 0;
             var target = new DirectoryInfo(@"tecoGAN\results\calendar");
             foreach (FileInfo file in target.GetFiles())
             {
@@ -176,6 +187,15 @@ namespace super_resolution_Application
                     }
                 }
             }
+
+            target = new DirectoryInfo(@"tecoGAN\LR\calendar");
+            foreach (FileInfo file in target.GetFiles())
+            {
+                tecoGAN_input_num++;
+            }
+            progressBar1.Maximum = tecoGAN_input_num;
+            progressBar1.Value = 0;
+
             var app = new System.Diagnostics.ProcessStartInfo();
             app.FileName = "cmd.exe";
             app.UseShellExecute = true;
@@ -192,6 +212,8 @@ namespace super_resolution_Application
                 extension = System.IO.Path.GetExtension(openFileDialog1.FileName);
             }
 
+
+            stopping = false;
 
             tecoGAN_output_num = 0;
             timer1.Start();
@@ -271,6 +293,9 @@ namespace super_resolution_Application
             {
                 filenum++;
             }
+
+            progressBar1.Value = 0;
+            progressBar1.Maximum = filenum;
             for (int i = 0; i < filenum; i++)
             {
                 if (stopping) break;
@@ -278,19 +303,28 @@ namespace super_resolution_Application
 
                 if (!System.IO.File.Exists(newfile)) continue;
                 var img = OpenCvSharp.Cv2.ImRead(newfile, OpenCvSharp.ImreadModes.Color);
-                //if (fileName != "temp")
-                //{
-                //    OpenCvSharp.Cv2.Resize(img, img, OpenCvSharp.Size.Zero, pictureBox1.Width, pictureBox1.Height, OpenCvSharp.InterpolationFlags.Cubic);
-                //}
+                if (!checkBox1.Checked)
+                {
+                    OpenCvSharp.Cv2.Resize(img, img, new OpenCvSharp.Size((int)((float)img.Width * (float)numericUpDown1.Value), (int)((float)img.Height * (float)numericUpDown1.Value)), 0, 0);
+                }
+                else
+                {
+                    OpenCvSharp.Cv2.Resize(img, img, new OpenCvSharp.Size((int)(0.5f + (float)img.Width / (float)numericUpDown1.Value), (int)(0.5f + (float)img.Height / (float)numericUpDown1.Value)), 0, 0);
+                }
+                pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(img);
 
-                pictureBox2.Image = CreateImage(newfile);
+                //pictureBox2.Image = CreateImage(newfile);
                 newfile = string.Format(@"tecoGAN\LR\calendar\{0:D4}" + ".png", i);
                 if (!System.IO.File.Exists(newfile)) continue;
                 pictureBox1.Image = CreateImage(newfile);
                 vw.Write(img);
+                progressBar1.Value++;
+                progressBar1.Refresh();
+                Application.DoEvents(); // 非推奨
             }
             vw.Dispose();
             stopping = false;
+            MessageBox.Show("finished");
 
             if (File.Exists(outfile))
             {
@@ -335,6 +369,12 @@ namespace super_resolution_Application
             if (!System.IO.File.Exists(newfile1) && !System.IO.File.Exists(newfile2)) return;
             if (System.IO.File.Exists(newfile2))
             {
+                if ( stopping)
+                {
+                    progressBar1.Value = progressBar1.Maximum;
+                    //tecoGAN.Kill();
+                    return;
+                }
                 try
                 {
                     pictureBox2.Image = CreateImage(newfile2);
@@ -342,6 +382,8 @@ namespace super_resolution_Application
                     newfile2 = string.Format(@"tecoGAN\LR\calendar\{0:D4}" + ".png", tecoGAN_output_num + 1);
                     pictureBox1.Image = CreateImage(newfile2);
                     tecoGAN_output_num += 1;
+                    progressBar1.Value++;
+                    progressBar1.Refresh();
                 }
                 catch { }
             }
@@ -370,8 +412,19 @@ namespace super_resolution_Application
             int width = 0;
             int height = 0;
             DirectoryInfo target1 = new DirectoryInfo(folder);
+
             foreach (FileInfo file in target1.GetFiles())
             {
+                progressBar1.Maximum++;
+
+            }
+            progressBar1.Value = 0;
+
+            stopping = false;
+            target1 = new DirectoryInfo(folder);
+            foreach (FileInfo file in target1.GetFiles())
+            {
+                if (stopping) break;
                 OpenCvSharp.Mat mat = new OpenCvSharp.Mat();
                 if (pictureBox1.Image != null)
                 {
@@ -394,8 +447,14 @@ namespace super_resolution_Application
                 OpenCvSharp.Cv2.ImWrite(filename, mat, (int[])null);
                 image_num++;
                 mat.Dispose();//Memory release
+
+                progressBar1.Value++;
+                progressBar1.Refresh();
+                Application.DoEvents(); // 非推奨
             }
             pictureBox1.Image = CreateImage(@"main\tecoGAN\LR\calendar\0001.png");
+            stopping = false;
+            MessageBox.Show("finished");
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -410,10 +469,19 @@ namespace super_resolution_Application
             app.FileName = "cmd.exe";
             app.UseShellExecute = true;
             app.Arguments = " /c png2Video_input_run.bat";
+            if (!checkBox1.Checked)
+            {
+                app.Arguments += " (1/" + numericUpDown1.Value.ToString() + ") ";
+            }
+            else
+            {
+                app.Arguments += " " + numericUpDown1.Value.ToString();
+            }
             var png2Video = System.Diagnostics.Process.Start(app);
             png2Video.EnableRaisingEvents = true;
             png2Video.WaitForExit();
-            MessageBox.Show("終了しました");
+            MessageBox.Show("finished");
+            MessageBox.Show("finished");
 
             if (File.Exists(apppath + @"\test.mp4"))
             {
@@ -435,17 +503,34 @@ namespace super_resolution_Application
             app.FileName = "cmd.exe";
             app.UseShellExecute = true;
             app.Arguments = " /c png2Video_input_run.bat";
+            if (!checkBox1.Checked)
+            {
+                app.Arguments += " (4/" + numericUpDown1.Value.ToString() + ") ";
+            }
+            else
+            {
+                app.Arguments += " 4*" + numericUpDown1.Value.ToString();
+            }
             var png2Video_input = System.Diagnostics.Process.Start(app);
             png2Video_input.EnableRaisingEvents = true;
-            //png2Video_input.WaitForExit();
 
             app = new System.Diagnostics.ProcessStartInfo();
             app.FileName = "cmd.exe";
             app.UseShellExecute = true;
             app.Arguments = " /c png2video_run.bat";
+            if (!checkBox1.Checked)
+            {
+                app.Arguments += " (1/" + numericUpDown1.Value.ToString() + ") ";
+            }
+            else
+            {
+                app.Arguments += " " + numericUpDown1.Value.ToString();
+            }
             var png2video_run = System.Diagnostics.Process.Start(app);
             png2video_run.EnableRaisingEvents = true;
+
             png2video_run.WaitForExit();
+            png2Video_input.WaitForExit();
 
             app = new System.Diagnostics.ProcessStartInfo();
             app.FileName = "cmd.exe";
@@ -454,12 +539,41 @@ namespace super_resolution_Application
             var JoinLRVideo = System.Diagnostics.Process.Start(app);
             JoinLRVideo.EnableRaisingEvents = true;
             JoinLRVideo.WaitForExit();
+            MessageBox.Show("finished");
 
             if (File.Exists(apppath + @"\output.mp4"))
             {
                 Form2 video = new Form2();
                 video.axWindowsMediaPlayer1.URL = apppath + @"\output.mp4";
                 video.Show();
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            System.Environment.CurrentDirectory = apppath;
+            DialogResult res = openFileDialog1.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+
+                var app = new System.Diagnostics.ProcessStartInfo();
+                app.FileName = "cmd.exe";
+                app.UseShellExecute = true;
+                app.Arguments = " /c Video2png.bat ";
+                app.Arguments += " tmp ";
+                app.Arguments += openFileDialog1.FileName;
+                if (!checkBox1.Checked)
+                {
+                    app.Arguments += " (1/" + numericUpDown1.Value.ToString() + ") ";
+                }
+                else
+                {
+                    app.Arguments += " " + numericUpDown1.Value.ToString();
+                }
+                var decomp = System.Diagnostics.Process.Start(app);
+                decomp.EnableRaisingEvents = true;
+                decomp.WaitForExit();
+                MessageBox.Show("finished");
             }
         }
     }
