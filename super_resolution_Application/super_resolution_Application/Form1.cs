@@ -576,6 +576,11 @@ namespace super_resolution_Application
                 MessageBox.Show("finished");
             }
         }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
