@@ -20,8 +20,8 @@ namespace super_resolution_Application
         double Fps = 24;
         bool video = false;
         string folder = "";
-        string apppath = System.IO.Directory.GetCurrentDirectory();
-        //string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
+        //string apppath = System.IO.Directory.GetCurrentDirectory();
+        string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
 
 
         public Form1()
@@ -51,6 +51,8 @@ namespace super_resolution_Application
         /// <returns>作成したSystem.Drawing.Image。</returns>
         public static System.Drawing.Image CreateImage(string filename)
         {
+            if (!File.Exists(filename)) return null;
+
             System.IO.FileStream fs = new System.IO.FileStream(
                 filename,
                 System.IO.FileMode.Open,
@@ -224,6 +226,8 @@ namespace super_resolution_Application
 
 
         }
+
+        delegate void FocusDelegate();
         private void tecoGAN_Exited(object sender, EventArgs e)
         {
             MessageBox.Show("終了しました");
@@ -250,7 +254,7 @@ namespace super_resolution_Application
             }
             else
             {
-                button3_Click(sender, e);
+                Invoke(new FocusDelegate(finalProc));
             }
         }
 
@@ -258,8 +262,7 @@ namespace super_resolution_Application
         {
 
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void finalProc()
         {
             System.Environment.CurrentDirectory = apppath + "\\main";
 
@@ -332,6 +335,12 @@ namespace super_resolution_Application
                 video.axWindowsMediaPlayer1.URL = outfile;
                 video.Show();
             }
+            progressBar1.Value = 0;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            finalProc();
         }
 
         private void button3_KeyDown(object sender, KeyEventArgs e)
