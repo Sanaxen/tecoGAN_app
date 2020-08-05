@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("super_resolution_Application")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("-")]
+[assembly: AssemblyCompany("--Personal work--")]
 [assembly: AssemblyProduct("super_resolution_Application")]
 [assembly: AssemblyCopyright("Copyright © Sanaxen 2019")]
 [assembly: AssemblyTrademark("")]
