@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("super_resolution_Application")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard Company")]
+[assembly: AssemblyCompany("-")]
 [assembly: AssemblyProduct("super_resolution_Application")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2019")]
+[assembly: AssemblyCopyright("Copyright © Sanaxen 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
