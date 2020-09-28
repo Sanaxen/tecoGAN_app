@@ -20,8 +20,8 @@ namespace super_resolution_Application
         double Fps = 24;
         bool video = false;
         string folder = "";
-        //string apppath = System.IO.Directory.GetCurrentDirectory();
-        string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
+        string apppath = System.IO.Directory.GetCurrentDirectory();
+        //string apppath = @"D:\tecoGAN_app\super_resolution_Application\super_resolution_Application\dist";
 
 
         public Form1()
@@ -198,6 +198,11 @@ namespace super_resolution_Application
             progressBar1.Maximum = tecoGAN_input_num;
             progressBar1.Value = 0;
 
+            if ( tecoGAN_input_num == 0 )
+            {
+                MessageBox.Show("Image file not found");
+                return;
+            }
             var app = new System.Diagnostics.ProcessStartInfo();
             app.FileName = "cmd.exe";
             app.UseShellExecute = true;
@@ -230,7 +235,7 @@ namespace super_resolution_Application
         delegate void FocusDelegate();
         private void tecoGAN_Exited(object sender, EventArgs e)
         {
-            MessageBox.Show("終了しました");
+            MessageBox.Show("All processing is finished");
             timer1.Stop();
             tecoGAN = null;
 
