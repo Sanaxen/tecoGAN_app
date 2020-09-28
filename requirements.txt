@@ -42,7 +42,7 @@ scipy==1.5.1
 six==1.15.0
 tensorboard==1.15.0
 tensorflow-estimator==1.15.1
-tensorflow-gpu==1.15.0
+tensorflow-gpu==1.15.4
 termcolor==1.1.0
 tifffile==2020.7.4
 #torch==1.5.0+cu92
