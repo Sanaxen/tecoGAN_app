@@ -1,4 +1,5 @@
-set cudapath="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin"
+:set cudapath="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin"
+set cudapath=.\cuda10
 copy %cudapath%\cublas64_100.dll env /v /y
 copy %cudapath%\cudart32_100.dll env /v /y
 copy %cudapath%\cudart64_100.dll env /v /y
