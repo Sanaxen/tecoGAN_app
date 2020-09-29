@@ -13,16 +13,13 @@ Windows application
   
 **Windows10+Anaconda3**
 ## Requirements  
-ImageMagick-7.0.10-Q16
+ImageMagick-7.0.10-Q16  
 
 
-```
-
-_ _ _
-## setup memo
+## setup memo  
 It worked correctly with the installation of tensorflow 1.15 (confirmed on win10 and win7).
-However, older versions of the torch will fail to install and cannot be trained.
-**`pip install -r requirements.txt`**
+However, older versions of the torch will fail to install and cannot be trained.  
+`pip install -r requirements.txt`
 
 ## How to super-resolution video
 Converts videos into serialized images.
