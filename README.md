@@ -4,7 +4,7 @@
 ![](./images/output.gif)  
 [Roman Holiday (1953) Original Trailer](https://www.youtube.com/watch?v=X_hyQgdGmU8)  
 * * * *
-Setup complete **Windows application [download](https://drive.google.com/file/d/1ltVsSPVj-xeqNmVaILwrw8GXccBrpmB8/view?usp=sharing)**  
+ **Windows application [download](https://drive.google.com/file/d/1ltVsSPVj-xeqNmVaILwrw8GXccBrpmB8/view?usp=sharing)**  
 
 [Use this if you are having trouble installing tensorflow.](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1c/dist.7z)  
 Please unzip to this location.  
