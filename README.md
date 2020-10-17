@@ -8,8 +8,12 @@
 
 <img src="./images/image00.png">
 * * * *
-[tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)
-![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)
+[tecoGAN](https://github.com/thunil/TecoGAN)  
+
+![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)  
+
+![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)  
+
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)  
   
 **Windows10+Anaconda3**
