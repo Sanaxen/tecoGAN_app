@@ -1,6 +1,6 @@
 # tecoGAN_app
 **Windows application [download](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1d/dist.7z)**  
-
+<img src="./images/image01.png">  
   
   
 `..........original................. tecoGAN ..........`
@@ -9,7 +9,8 @@
 * * * *
 **Windows application**  
 
-<img src="./images/image00.png">
+<img src="./images/image00.png">  
+
 * * * *
 [tecoGAN](https://github.com/thunil/TecoGAN)  
 
