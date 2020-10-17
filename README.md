@@ -11,8 +11,8 @@ Please unzip to this location.
 `super_resolution_Application\super_resolution_Application\dist` 
 
 
-<img src="./images/image00.png">
-* * * *  
+<img src="./images/image00.png">  
+  
 [tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)  
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)  
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)  
