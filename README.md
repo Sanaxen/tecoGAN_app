@@ -1,10 +1,13 @@
-# tecoGAN_app  
+# tecoGAN_app
+**Windows application [download](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1d/dist.7z)**  
 
+  
+  
 `..........original................. tecoGAN ..........`
 ![](./images/output.gif)  
 [Roman Holiday (1953) Original Trailer](https://www.youtube.com/watch?v=X_hyQgdGmU8)  
 * * * *
-**Windows application [download](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1d/dist.7z)**  
+**Windows application**  
 
 <img src="./images/image00.png">
 * * * *
