@@ -4,17 +4,12 @@
 ![](./images/output.gif)  
 [Roman Holiday (1953) Original Trailer](https://www.youtube.com/watch?v=X_hyQgdGmU8)  
 * * * *
- **Windows application [download](https://drive.google.com/file/d/1ltVsSPVj-xeqNmVaILwrw8GXccBrpmB8/view?usp=sharing)**  
+**Windows application [download](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1d/dist.7z)**  
 
-[Use this if you are having trouble installing tensorflow.](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1c/dist.7z)  
-Please unzip to this location.  
-`super_resolution_Application\super_resolution_Application\dist` 
-
-
-<img src="./images/image00.png">  
-  
-[tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)  
-![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)  
+<img src="./images/image00.png">
+* * * *
+[tecoGAN](https://github.com/thunil/TecoGAN)![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-lizard.gif)
+![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-armour.gif)
 ![](https://github.com/thunil/TecoGAN/raw/master/resources/tecoGAN-spider.gif)  
   
 **Windows10+Anaconda3**
