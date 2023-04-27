@@ -1,5 +1,5 @@
 # tecoGAN_app
-**Windows application [download](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1d/dist.7z)**  
+**Windows application [download](https://github.com/Sanaxen/tecoGAN_app/releases/download/v0.1.1e/dist.7z)**  
 <img src="./images/image01.png">  
   
   
