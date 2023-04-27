@@ -192,6 +192,14 @@ namespace super_resolution_Application
                         file.Delete();
                     }
                     var mat = OpenCvSharp.Cv2.ImRead(openFileDialog1.FileName);
+                    if (!checkBox1.Checked)
+                    {
+                        OpenCvSharp.Cv2.Resize(mat, mat, new OpenCvSharp.Size((int)((float)mat.Width * (float)numericUpDown1.Value), (int)((float)mat.Height * (float)numericUpDown1.Value)), 0, 0);
+                    }
+                    else
+                    {
+                        OpenCvSharp.Cv2.Resize(mat, mat, new OpenCvSharp.Size((int)(0.5f + (float)mat.Width / (float)numericUpDown1.Value), (int)(0.5f + (float)mat.Height / (float)numericUpDown1.Value)), 0, 0);
+                    }
 
                     for (int i = 0; i < 15; i++)
                     {
